@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main">
+    <div class="main-header">
+      <div class="container">
+        <div class="main-header-title">
+          <img class="main-header-icon" src="../assets/whatsapp.png" alt="logo">
+          <div class="main-header-text">whatsapp replica web</div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content"></div>
+    <chat-modal />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import ChatModal from '@/components/ChatModal'
 
 export default {
-  name: 'home',
   components: {
-    HelloWorld
+    ChatModal
+  },
+  data() {
+    return {
+
+    }
   }
 }
 </script>

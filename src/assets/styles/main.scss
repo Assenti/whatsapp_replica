@@ -1,0 +1,33 @@
+.main {
+
+}
+
+.main-header {
+    background-color: #1ebea5;
+    height: 222px;
+    width: 100%;
+    z-index: -1;
+    padding: 27px 0 0 68px;
+}
+
+.main-header-title {
+    display: flex;
+    align-items: center;
+}
+
+.main-header-text {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 15px;
+    color: white;
+}
+
+.main-header-icon {
+    width: 39px;
+    height: 39px;
+}
+
+.main-content {
+
+}
