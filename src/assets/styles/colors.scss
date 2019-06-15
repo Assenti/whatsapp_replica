@@ -1,0 +1,10 @@
+$wa-green: #1ebea5;
+$wa-light: #f7f7f7;
+$wa-dark: #4d4d4d;
+$wa-grey: #eee;
+
+@each $color in red, green {
+    .text-#{$color} {
+        color: #{$color} !important;
+    }
+}

@@ -1,0 +1,30 @@
+@import 'colors';
+
+.chat-room {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.chat-participants {
+    min-width: 260px;
+    width: 25%;
+    height: 100%;
+    border-right: 1px solid $wa-grey;
+}
+
+.chat-participants-toolbar {
+    background: $wa-grey;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.chat-box {
+    width: 75%;
+    max-width: calc(100% - 260px);
+    height: 100%;
+    background: $wa-light;
+}

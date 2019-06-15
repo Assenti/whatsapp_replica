@@ -1,0 +1,30 @@
+@import 'colors';
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+
+    & > button {
+        border-radius: 30px;
+        outline: none;
+        text-transform: uppercase;
+        min-width: 100px;
+        background-color: $wa-green;
+        color: white;
+        height: 35px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    & > button:hover {
+        background-color: darken($wa-green, 5%);
+    }
+}
+
+.btn.block {
+    & > button {
+        width: 100%;
+    }
+}

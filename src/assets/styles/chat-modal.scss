@@ -1,6 +1,5 @@
 .chat-modal-wrapper {
     position: fixed;
-    // background-color: rgba(0, 0, 0, .1);
     top: 0;
     left: 0;
     width: 100%;
@@ -12,9 +11,19 @@
 }
 
 .chat-modal {
-    box-shadow: 1px 5px 10px rgba(0, 0, 0, .3);
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, .4);
     max-width: 1000px;
     min-height: 440px;
-    background-color: white;
+    background-color: $wa-light;
     z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2% 1%;
+    border-radius: 2px;
+}
+
+.chat-modal-block {
+    flex-basis: 350px;
+    flex-grow: 1;
+    min-width: 350px;
 }

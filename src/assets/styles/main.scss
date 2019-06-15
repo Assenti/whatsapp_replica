@@ -1,9 +1,11 @@
+@import 'colors';
+
 .main {
 
 }
 
 .main-header {
-    background-color: #1ebea5;
+    background-color: $wa-green;
     height: 222px;
     width: 100%;
     z-index: -1;

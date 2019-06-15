@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @import 'main';
 @import 'chat-modal';
+@import 'form';
+@import 'form-field';
+@import 'btn';
+@import 'login';
+@import 'preloader';
+@import 'error';
+@import 'chat-room';
+@import 'icon';
 
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .container {
