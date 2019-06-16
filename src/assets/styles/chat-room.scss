@@ -6,15 +6,32 @@
     height: 100vh;
 }
 
+.chat-search-block {
+    height: 55px;
+    width: 100%;
+    background-color: $wa-light;
+    border: 1px solid $wa-grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+
+    & > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
 .chat-participants {
     min-width: 260px;
-    width: 25%;
+    width: 30%;
     height: 100%;
-    border-right: 1px solid $wa-grey;
+    border-right: 1px solid #e7e7e7;
 }
 
 .chat-participants-toolbar {
     background: $wa-grey;
+    border: .5px solid $wa-grey;
     height: 60px;
     display: flex;
     align-items: center;
@@ -22,9 +39,88 @@
     padding: 0 10px;
 }
 
+.chats-list {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+}
+
+.chats-list-item {
+    height: 70px;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &.active {
+        background-color: $wa-grey;
+    }
+
+    &:hover {
+        background-color: $wa-light;
+    }
+}
+
+.chats-list-item-avatar {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    border: 1px solid $wa-grey;
+    overflow: hidden;
+    background-clip: $wa-grey;
+    margin-right: 13px;
+
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.chats-list-item-content {
+    height: 100%;
+    width: calc(100% - 40px);
+    border-bottom: 1px solid $wa-grey;
+}
+
 .chat-box {
-    width: 75%;
+    width: 70%;
     max-width: calc(100% - 260px);
     height: 100%;
     background: $wa-light;
+}
+
+.chat-box-toolbar {
+    background: $wa-grey;
+    border: .5px solid $wa-grey;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.chat-box-content {
+    background-image: url('../wa-wallpaper.png');
+    background-size: 55%;
+    height: calc(100% - 120px);
+    max-height: calc(100% - 120px);
+    overflow-y: auto;
+    background-position: fixed;
+}
+
+.chat-box-controls {
+    background: $wa-light;
+    border: .5px solid $wa-grey;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.chat-box-controls-field {
+    width: calc(100% - 80px) !important;
+    max-width: calc(100% - 80px) !important;
+    margin: 0 10px;
 }

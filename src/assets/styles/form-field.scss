@@ -1,7 +1,6 @@
 .form-field {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
     max-width: 300px;
     min-width: 300px;
 
@@ -24,7 +23,7 @@
         border-radius: 30px;
         background-color: white;
         padding: 0 10px;
-        border: 1px solid transparent;
+        border: 1px solid white;
     }
 
     & > div > i {
@@ -42,7 +41,8 @@
         height: 100%;
 
         &::placeholder {
-            color: lightgrey;
+            color: #8c8c8c;
+            font-weight: 100;
         }
     }
 }
