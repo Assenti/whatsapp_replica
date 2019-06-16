@@ -2,9 +2,21 @@
     <div class="chat-room">
         <div class="chat-participants">
             <div class="chat-participants-toolbar">
-                <div></div>
+                <div class="chats-participants-toolbar-avatar">
+                    <!-- <img src="../assets/user.svg" alt="avatar"> -->
+                </div>
                 <div>
-                    <icon icon="more_vert"/>
+                    <div class="menu-wrapper" 
+                        tabindex="-1"
+                        @click="menu = true"
+                        @blur="menu = false">
+                        <icon icon="more_vert">
+                        </icon>
+                        <div class="menu" v-if="menu">
+                            <div @click="logout" class="menu-item">Log out</div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="chat-search-block">
@@ -21,10 +33,22 @@
 <script>
 import ChatBox from '@/components/ChatBox'
 import ChatsList from '@/components/ChatsList'
+import { bus } from '@/main'
 
 export default {
     components: {
         ChatBox, ChatsList
+    },
+    data() {
+        return {
+            menu: false
+        }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('unsetUser')
+            this.menu = false
+        }
     }
 }
 </script>

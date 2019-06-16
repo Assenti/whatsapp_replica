@@ -6,8 +6,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
+
+    &:active {
+        background-color: #ccc;
+    }
 
     & > i {
-        color: #808080;
+        color: #8c8c8c;
     }
 }

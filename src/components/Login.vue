@@ -4,6 +4,7 @@
         <form class="form" @submit.prevent="validateBeforeSubmit">
             <form-field v-model="login"
                 label="Login"
+                class="mb-5"
                 placeholder="Login"
                 v-validate="'required'"
                 :autocomplete="false"
@@ -11,7 +12,7 @@
                 :msg="errors.first('login')"
                 icon="person"/>
             <form-field v-model="password" 
-                label="Password"
+                label="Password"    
                 placeholder="Password"
                 v-validate="'required'"
                 name="password"

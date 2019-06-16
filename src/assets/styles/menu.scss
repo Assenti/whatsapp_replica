@@ -1,0 +1,30 @@
+.menu-wrapper {
+    position: relative;
+    height: 40px;
+    outline: none;
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 155px;
+    width: 155px;
+    background-color: white;
+    padding: 8px 0;
+    border-radius: 2px;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, .3);
+}
+
+.menu-item {
+    height: 40px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+        background-color: $wa-light;
+    }
+}
