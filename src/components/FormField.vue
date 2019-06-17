@@ -35,6 +35,12 @@ export default {
             content: this.value
         }
     },
+    mounted() {
+        this.$parent.$on('clearField', () => {
+            console.log('invoked')
+            this.content = ''
+        })
+    },
     computed: {
         
     },

@@ -13,12 +13,7 @@ import { backendService } from './services/backendService'
 Vue.use(VeeValidate)
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:3000',
-    vuex: {
-        store,
-        actionPrefix: 'SOCKET_',
-        mutationPrefix: 'SOCKET_'
-    }
+    connection: 'http://localhost:3000'
 }))
 
 Vue.prototype.$backend = backendService

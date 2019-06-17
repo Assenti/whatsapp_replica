@@ -105,6 +105,10 @@
     background: $wa-light;
 }
 
+.chat-current {
+    height: 100%;
+}
+
 .chat-box-toolbar {
     background: $wa-grey;
     border: .5px solid $wa-grey;
@@ -124,6 +128,18 @@
     background-position: fixed;
 }
 
+.chat-box-message {
+    min-height: 40px;
+    border-radius: 8px;
+    min-width: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
 .chat-box-controls {
     background: $wa-light;
     border: .5px solid $wa-grey;
@@ -132,6 +148,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
+}
+
+.chat-box-message-send-block {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .chat-box-controls-field {

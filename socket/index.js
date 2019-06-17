@@ -4,6 +4,11 @@ const socketEvents = (ws) => {
     ws.sockets.on('connection', (socket)=> {
 		console.log('Sockets connected...')
 
+		socket.on('newMsg', data => {
+			console.log(data)
+			socket.emit('newMsg', data)
+		})
+
 		// socket.on('roomentered', (data)=> {
 		// 	Room.findById(data.room_id).exec((err, room)=> {
 		// 		if(err) return socket.emit('updateroom', 'SERVER', err.message)
