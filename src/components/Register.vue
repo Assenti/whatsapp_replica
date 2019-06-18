@@ -1,52 +1,114 @@
 <template>
     <div class="login">
         <div class="login-title">Register</div>
-        <form class="form" @submit.prevent="register">
-            <form-field v-model="firstname" 
+        <form class="form" @submit.prevent="validateBeforeSubmit">
+            <form-field v-model="credentials.firstname" 
                 label="Firstname"
                 class="mb-5"
+                v-validate="'required'"
+                :autocomplete="false"
+                name="firstname"
+                :msg="errors.first('firstname')"
                 placeholder="Input your firstname"
                 icon="person"/>
-            <form-field v-model="lastname" 
+            <form-field v-model="credentials.lastname" 
                 label="Lastname"
                 class="mb-5"
+                v-validate="'required'"
+                :msg="errors.first('lastname')"
+                :autocomplete="false"
+                name="lastname"
                 placeholder="Input your lastname"
                 icon="person"/>
-            <form-field v-model="email" 
+            <form-field v-model="credentials.email" 
                 label="Email"
                 class="mb-5"
+                v-validate="'required'"
+                :msg="errors.first('email')"
+                :autocomplete="false"
+                name="email"
                 placeholder="Input your Email"
                 icon="mail"/>
-            <form-field v-model="password" 
+            <form-field v-model="credentials.password" 
                 label="Password"
                 class="mb-5"
+                v-validate="'required'"
+                :autocomplete="false"
+                :msg="errors.first('password')"
+                name="password"
                 type="password"
                 placeholder="Create password"
                 icon="lock"/>
-            <form-field v-model="password" 
+            <form-field v-model="confirmPassword" 
                 label="Confirm Password"
                 icon="lock"
                 placeholder="Confirm password"
                 type="password"/>
-            <btn btnTitle="register" type="submit" :block="true"/>
+
+            <div class="error">{{ error }}</div>
+            <div class="success">{{ msg }}</div>
+            <btn btnTitle="register" 
+                 type="submit"
+                 @click="validateBeforeSubmit"/>
         </form>
     </div>
 </template>
 
 <script>
+import { bus } from '@/main'
 export default {
     data() {
         return {
-            firstname: '',
-            lastname: '',
-            email: '',
-            password: '',
+            credentials: {
+                firstname: '',
+                lastname: '',
+                email: '',
+                password: ''
+            },
             confirmPassword: '',
+            loading: false,
+            error: '',
+            msg: ''
+        }
+    },
+    computed: {
+        isPasswordSame() {
+            return this.credentials.password === this.confirmPassword
         }
     },
     methods: {
-        register() {
-
+        validateBeforeSubmit() {
+            this.$validator.validateAll()
+            .then(result => {
+                if(result) {
+                    if(this.isPasswordSame) {
+                        this.register()
+                        return
+                    }
+                    else if(!this.isPasswordSame) {
+                        this.error = 'Passwords do not match'
+                        setTimeout(() => {
+                            this.error = ''
+                        }, 5000)
+                    }
+                }
+            })
+        },
+        async register() {
+            try {
+                bus.$emit('preloaderOn')
+                await this.$http.post('/register', this.credentials)
+                this.msg = 'You are successfully registered'
+            }
+            catch(e) {
+                this.error = e.response.data ? e.response.data : 'Error occurred'
+                setTimeout(() => {
+                    this.error = ''
+                }, 5000)
+            }
+            finally {
+                bus.$emit('preloaderOff')
+            }
         }
     }
 }

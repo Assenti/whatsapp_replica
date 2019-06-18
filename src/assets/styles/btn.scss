@@ -9,6 +9,7 @@
     & > button {
         border-radius: 30px;
         outline: none;
+        border: medium none; 
         text-transform: uppercase;
         min-width: 100px;
         background-color: $wa-green;
@@ -20,6 +21,7 @@
 
     & > button:hover {
         background-color: darken($wa-green, 5%);
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, .3);
     }
 }
 

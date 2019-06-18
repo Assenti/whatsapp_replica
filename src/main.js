@@ -17,6 +17,7 @@ Vue.use(new VueSocketIO({
 }))
 
 Vue.prototype.$backend = backendService
+Vue.prototype.$http = backendService.http
 Vue.config.productionTip = false
 Vue.component('form-field', FormField)
 Vue.component('btn', Btn)
