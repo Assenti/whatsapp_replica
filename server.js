@@ -6,7 +6,8 @@ const path = require('path')
 const app = express()
 const routes = require('./routes')
 const socketEvents = require('./socket')
-const port = process.env.PORT || 3000
+const { port, mongoURI } = require('./config')
+mongoose.connect(mongoURI, { useNewUrlParser: true })
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(bodyParser.json())
