@@ -13,7 +13,7 @@ export default {
     },
     computed: {
         iconColor() {
-            return this.color ? `${this.color}-text` : ''
+            return this.color ? `text-${this.color}` : ''
         }
     }
 }

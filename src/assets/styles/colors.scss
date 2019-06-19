@@ -4,7 +4,7 @@ $wa-dark: #4d4d4d;
 $wa-grey: #eee;
 $wa-lightgrey: #e8e8e8;
 
-@each $color in red, green {
+@each $color in red, green, white {
     .text-#{$color} {
         color: #{$color} !important;
     }

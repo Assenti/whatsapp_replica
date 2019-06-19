@@ -1,5 +1,55 @@
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.no-outline {
+    outline: none;
+}
+
 @each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
     .mb-#{$size} {
         margin-bottom: #{$size}px !important;
+    }
+}
+
+@each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
+    .mt-#{$size} {
+        margin-top: #{$size}px !important;
+    }
+}
+
+@each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
+    .ml-#{$size} {
+        margin-left: #{$size}px !important;
+    }
+}
+
+@each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
+    .mr-#{$size} {
+        margin-right: #{$size}px !important;
+    }
+}
+
+@each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
+    .mx-#{$size} {
+        margin: 0 #{$size}px !important;
+    }
+}
+
+@each $size in 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 {
+    .my-#{$size} {
+        margin: #{$size}px 0 !important;
     }
 }

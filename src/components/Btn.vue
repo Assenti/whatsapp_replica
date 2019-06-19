@@ -1,5 +1,6 @@
 <template>
-    <div class="btn" :class="{'block': block }">
+    <div class="btn" 
+        :class="{'block': block }">
         <button :disabled="disabled ? disabled : false" 
             :type="type">{{ btnTitle }}</button>
     </div>
@@ -13,8 +14,10 @@ export default {
 
         }
     },
+    mounted() {
+    },
     methods: {
-
+        
     }
 }
 </script>

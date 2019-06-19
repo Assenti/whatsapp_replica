@@ -5,12 +5,20 @@
                 <div class="chats-participants-toolbar-avatar">
                     <!-- <img src="../assets/user.svg" alt="avatar"> -->
                 </div>
-                <div>
+                <div class="flex align-center">
+                    <div tabindex="-1"
+                        class="no-outline" 
+                        @blur="drawer = false" 
+                        @click="drawer = true">
+                        <icon icon="chat" 
+                        title="New chat" 
+                        class="mx-10"/>
+                    </div>
                     <div class="menu-wrapper" 
                         tabindex="-1"
                         @click="menu = true"
                         @blur="menu = false">
-                        <icon icon="more_vert"/>
+                        <icon icon="more_vert" title="Menu"/>
                         <div class="menu" v-if="menu">
                             <div class="menu-item">Profile</div>
                             <div @click="logout" class="menu-item">Log out</div>
@@ -25,6 +33,11 @@
             </div>
             <chats-list/>
         </div>
+        <transition name="animations" 
+            enter-active-class="slideInLeft"
+            leave-active-class="slideOutRight">
+            <right-drawer v-if="drawer"></right-drawer>
+        </transition>
         <chat-box/>
     </div>
 </template>
@@ -32,16 +45,21 @@
 <script>
 import ChatBox from '@/components/ChatBox'
 import ChatsList from '@/components/ChatsList'
+import RightDrawer from '@/components/RightDrawer'
 import { bus } from '@/main'
 
 export default {
     components: {
-        ChatBox, ChatsList
+        ChatBox, ChatsList, RightDrawer
     },
     data() {
         return {
-            menu: false
+            menu: false,
+            drawer: false
         }
+    },
+    created() {
+        bus.$on('closeDrawer', () => this.drawer = false)
     },
     directives: {
         focus: {
@@ -54,6 +72,11 @@ export default {
         logout() {
             this.$store.dispatch('unsetUser')
             this.menu = false
+        },
+        newChat() {
+            console.log('Invoked')
+            // this.$emit('clicked')
+            this.drawer = true
         }
     }
 }
