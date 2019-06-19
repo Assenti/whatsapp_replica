@@ -1,6 +1,10 @@
 <template>
     <div class="chat-box">
-        <current-chat :chatData="chatData"/>
+        <div class="chat-box-intro" v-if="chatData">
+            <div></div>
+            <h1>Keep your phone connected</h1>
+        </div>
+        <current-chat v-else :chatData="chatData"/>
     </div>
 </template>
 

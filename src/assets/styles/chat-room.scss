@@ -105,6 +105,37 @@
     background: $wa-light;
 }
 
+.chat-box-intro {
+    background-color: $wa-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+
+    & > div {
+        width: 80%;
+        min-width: 280px;
+        height: 280px;
+        background-image: url('../wa-intro-pic.jpg');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+
+    & > h1 {
+        font-size: 36px;
+        color: #4b5961;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    & > span {
+
+    }
+}
+
 .chat-current {
     height: 100%;
 }

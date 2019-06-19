@@ -10,13 +10,12 @@
                         tabindex="-1"
                         @click="menu = true"
                         @blur="menu = false">
-                        <icon icon="more_vert">
-                        </icon>
+                        <icon icon="more_vert"/>
                         <div class="menu" v-if="menu">
+                            <div class="menu-item">Profile</div>
                             <div @click="logout" class="menu-item">Log out</div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="chat-search-block">
@@ -42,6 +41,13 @@ export default {
     data() {
         return {
             menu: false
+        }
+    },
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus()
+            }
         }
     },
     methods: {
