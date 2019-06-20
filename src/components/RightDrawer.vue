@@ -9,10 +9,7 @@
                 <span>New Chat</span>
             </div>
         </div>
-        <div class="drawer-search-block"></div>
-        <div class="drawer-content">
-
-        </div>
+        <slot name="content" class="drawer-content"></slot>
     </div>
 </template>
 

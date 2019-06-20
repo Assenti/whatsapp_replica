@@ -1,10 +1,13 @@
 <template>
     <div class="chats-list">
-        <div v-for="(chat, index) in 30" 
+        <slot name="list-item"></slot>
+        <slot name="other"></slot>
+        <div v-for="(chat, index) in chats" 
             :key="index" 
             class="chats-list-item">
             <div class="chats-list-item-avatar">
-                <img :title="iconAuthor" src="../assets/user.png" 
+                <img :title="iconAuthor" 
+                    src="../assets/user.png" 
                     alt="avatar">
             </div>
             <div class="chats-list-item-content">
@@ -21,6 +24,9 @@
 
 <script>
 export default {
+    props: {
+        chats: Array
+    },
     data() {
         return {
             iconAuthor: 'Icons from https://www.flaticon.com/authors/smashicons'

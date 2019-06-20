@@ -31,12 +31,16 @@
                     placeholder="Search or start new chat" 
                     icon="search"/>
             </div>
-            <chats-list/>
+            <chats-list :chats="[1,2,3,4,5,6,7,8,9,10]"/>
         </div>
         <transition name="animations" 
             enter-active-class="slideInLeft"
             leave-active-class="slideOutRight">
-            <right-drawer v-if="drawer"></right-drawer>
+            <right-drawer v-if="drawer">
+                <template slot="content">
+                    <new-chat/>
+                </template>
+            </right-drawer>
         </transition>
         <chat-box/>
     </div>
@@ -46,11 +50,12 @@
 import ChatBox from '@/components/ChatBox'
 import ChatsList from '@/components/ChatsList'
 import RightDrawer from '@/components/RightDrawer'
+import NewChat from '@/components/NewChat'
 import { bus } from '@/main'
 
 export default {
     components: {
-        ChatBox, ChatsList, RightDrawer
+        ChatBox, ChatsList, RightDrawer, NewChat
     },
     data() {
         return {

@@ -1,0 +1,34 @@
+@import 'colors';
+
+.new-chat {
+    height: 100%;
+    width: 100%;
+}
+
+.new-chat-search-block {
+    height: 49px;
+    width: 100%;
+    background-color: $wa-grey;
+    border: .5px solid $wa-grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    input {
+        padding-left: 20px !important;
+        font-size: 14px !important;
+    }
+
+    i {
+        font-size: 20px !important;
+    }
+}
+
+.new-chat-list {
+    background-color: #fff;
+    height: 100%;
+    & > .chats-list {
+        max-height: calc(100vh - 160px) !important;
+    }
+}

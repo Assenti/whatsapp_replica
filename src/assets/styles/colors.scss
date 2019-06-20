@@ -1,4 +1,5 @@
 $wa-green: #1ebea5;
+$wa-green-dark: #128c7e;
 $wa-light: #f7f9fa;
 $wa-dark: #4d4d4d;
 $wa-grey: #eee;
@@ -8,4 +9,16 @@ $wa-lightgrey: #e8e8e8;
     .text-#{$color} {
         color: #{$color} !important;
     }
+}
+
+.text-wa-green {
+    color: $wa-green;
+}
+
+.wa-green {
+    background-color: $wa-green;
+}
+
+.wa-green-dark {
+    background-color: $wa-green-dark;
 }

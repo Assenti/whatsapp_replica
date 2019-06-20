@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     height: 100vh;
-    min-width: 260px;
+    min-width: 330px;
     width: 30%;
     z-index: 2;
 }
@@ -52,18 +52,13 @@
         font-weight: 300;
         color: #fff;
         margin-left: 15px;
+        user-select: none;
     }
-}
-
-.drawer-search-block {
-    height: 49px;
-    width: 100%;
-    background-color: $wa-light;
 }
 
 .drawer-content {
     width: 100%;
-    height: calc(100vh - 157px);
+    height: calc(100vh - 108px);
     overflow-y: auto;
     background-color: #fff;
 }
