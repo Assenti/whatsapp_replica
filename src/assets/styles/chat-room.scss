@@ -23,7 +23,7 @@
 }
 
 .chat-participants {
-    min-width: 260px;
+    min-width: 330px;
     width: 30%;
     height: 100%;
     border-right: 1px solid #e7e7e7;
@@ -57,6 +57,20 @@
 .chats-list {
     max-height: calc(100vh - 110px);
     overflow-y: auto;
+    /* width */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #fff;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #bfbfbf; 
+    }
 }
 
 .chats-list-item {
@@ -96,6 +110,29 @@
     height: 100%;
     width: calc(100% - 40px);
     border-bottom: 1px solid $wa-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chats-list-item-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > div {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    & > span {
+        font-size: 11px;
+        color: #8c8c8c;
+    }
+}
+
+.chats-list-item-subtitle {
+    font-size: 13px;
 }
 
 .chat-box {
