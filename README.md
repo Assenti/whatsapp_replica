@@ -1,29 +1,8 @@
-# whatsapp_replica
+# WhatsApp Replica
+The WhatsApp popular messenger web version replica
 
-## Project setup
 ```
-npm install
+Frontend: JS (ES6), Vue.js, Socket.io, SCSS
+Backend: Node.js, Socket.io
+DB: MongoDB
 ```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
