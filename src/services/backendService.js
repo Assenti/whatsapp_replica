@@ -8,7 +8,12 @@ const instance = axios.create({
 
 export const backendService = {
     http: instance,
-    login: login
+    login: login,
+    setJwt: setJwt
+}
+
+function setJwt() {
+    instance.defaults.headers.common['Authorization'] = store.getters.getToken
 }
 
 function login(credentials) {

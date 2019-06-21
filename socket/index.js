@@ -1,4 +1,5 @@
-
+const MessageService = require('../services/MessageService')
+const msg = new MessageService()
 
 const socketEvents = (ws) => {
     ws.sockets.on('connection', (socket)=> {
@@ -6,7 +7,14 @@ const socketEvents = (ws) => {
 
 		socket.on('newMsg', data => {
 			console.log(data)
-			socket.emit('newMsg', data)
+			const { chatId, senderId, message } = data
+			msg.addMessage(chatId, senderId, message)
+			.then(updatedChat => {
+				socket.emit('newMsg', message)
+			})
+			.catch(e => {
+				console.log(e)
+			})			
 		})
 
 		// socket.on('roomentered', (data)=> {

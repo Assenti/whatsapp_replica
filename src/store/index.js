@@ -13,6 +13,11 @@ export default new Vuex.Store({
         return true
       }
       else return false 
+    },
+    getToken(state) {
+      if(state.user) {
+        return state.user.token
+      }
     }
   },
   mutations: {

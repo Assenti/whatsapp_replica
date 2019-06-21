@@ -2,6 +2,7 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { jwtSecret, session } = require('../config')
 
+// Login
 exports.login = (req, res) => {
     const { login, password } = req.body
     
@@ -16,7 +17,6 @@ exports.login = (req, res) => {
                         res.status(500).send('Error occured while signing in')
                     }
                     else {
-                        user.token = token
                         res.send({
                             _id: user._id,
                             createdAt: user.createdAt,
@@ -24,7 +24,8 @@ exports.login = (req, res) => {
                             firstname: user.firstname,
                             lastname: user.lastname,
                             avatar: user.avatar ? user.avatar : '',
-                            status: user.status ? user.status : ''
+                            status: user.status ? user.status : '',
+                            token: token
                         })
                     }
                 })

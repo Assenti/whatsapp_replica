@@ -3,7 +3,7 @@
         <div class="chat-participants">
             <div class="chat-participants-toolbar">
                 <div class="chats-participants-toolbar-avatar">
-                    <!-- <img src="../assets/user.svg" alt="avatar"> -->
+                    <img src="../assets/user.png" alt="avatar">
                 </div>
                 <div class="flex align-center">
                     <div tabindex="-1"
@@ -31,7 +31,7 @@
                     placeholder="Search or start new chat" 
                     icon="search"/>
             </div>
-            <chats-list :chats="[1,2,3,4,5,6,7,8,9,10]"/>
+            <chats-list :chats="chats"/>
         </div>
         <transition name="animations" 
             enter-active-class="slideInLeft"
@@ -60,7 +60,8 @@ export default {
     data() {
         return {
             menu: false,
-            drawer: false
+            drawer: false,
+            chats: []
         }
     },
     created() {

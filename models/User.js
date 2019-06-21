@@ -7,8 +7,9 @@ const UserSchema = mongoose.Schema({
     avatar: String,
     createdAt: { type: Date, default: Date.now },
     password: String,
-    status: String,
-    chats: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }]
+    status: { type: String, default: 'Hey there! I am using WhatsApp Replica.'},
+    chats: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }],
+    contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 })
 
 module.exports = mongoose.model('User', UserSchema)

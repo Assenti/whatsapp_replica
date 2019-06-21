@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer')
 const MAIL = `"WhatsApp Replica" <${config.mailConfig.auth.user}>`
 const transporter = nodemailer.createTransport(config.mailConfig)
 
-
+// Register new User
 exports.register = (req, res) => {
 
     const data = {
@@ -62,4 +62,30 @@ exports.register = (req, res) => {
             }
         })
     }
+}
+
+// Search User
+exports.searchUser = async (req, res) => {
+    const { query } = req.query
+    const myRegExp = new RegExp(`${query}`, 'i')
+    console.log(myRegExp)
+    try {
+        let users = await User.find({
+            $or: [
+                { email: myRegExp },
+                { firstname: myRegExp },
+                { lastname: myRegExp }            
+            ]
+        }).limit(5).exec()
+        
+        res.send(users)
+    }
+    catch (e) {
+        res.status(500).send('Error occurred while searching contact')
+    }
+}   
+
+// Add new Contact 
+exports.addContact = (req, res) => {
+    
 }
