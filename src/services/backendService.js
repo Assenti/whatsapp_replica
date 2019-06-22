@@ -1,9 +1,10 @@
 import axios from 'axios'
 import store from '../store'
+import config from '../../config'
 import { bus } from '../main'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/api'
+    baseURL: `${config.devHost}/api`
 })
 
 export const backendService = {

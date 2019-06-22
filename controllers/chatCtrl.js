@@ -58,7 +58,7 @@ exports.getChats = async (req, res) => {
         .populate('chats')
         .populate({ 
             path: 'chats',
-            populate: 'users'
+            populate: ['users', 'messages']
         })
         .exec()
         res.send(user.chats)

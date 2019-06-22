@@ -1,9 +1,22 @@
 const MessageService = require('../services/MessageService')
+const Chat = require('../models/Chat')
 const msg = new MessageService()
 
 const socketEvents = (ws) => {
     ws.sockets.on('connection', (socket)=> {
 		console.log('Sockets connected...')
+
+		socket.on('chatEntered', async data => {
+			const { chatId } = data
+			socket.room = chatId
+			socket.join(socket.room)
+			try {
+				await Chat.findById(_id).exec()
+			}
+			catch (e) {
+				socket.emit('notifications', 'Error occurred')
+			}
+		})
 
 		socket.on('newMsg', async data => {
 			console.log(data)
@@ -11,10 +24,14 @@ const socketEvents = (ws) => {
 			
 			try {
 				const updChat = await msg.addMessage(chatId, senderId, message)
-				socket.emit('newMsg', message)
+				const lastMsg = updChat.messages[updChat.messages.length - 1]
+				socket.room = chatId
+				socket.join(socket.room)
+				socket.broadcast.to(socket.room).emit('newMsgToChat', lastMsg)
+				socket.emit('newMsg', lastMsg)
 			}
 			catch (e) {
-				socket.emit('newMsg', 'Error occurred')
+				socket.emit('notifications', 'Error occurred')
 			}
 		})
 

@@ -5,3 +5,7 @@ const Chat = require('../models/Chat')
 exports.addMessage = (req, res) => {
     
 }
+
+exports.getChatMessages = async (req, res) => {
+    
+}

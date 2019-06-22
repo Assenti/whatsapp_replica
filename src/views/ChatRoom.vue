@@ -31,7 +31,8 @@
                     placeholder="Search or start new chat" 
                     icon="search"/>
             </div>
-            <chats-list :chats="chats"/>
+            <chats-list :chats="chats"
+                @clicked="openChat"/>
         </div>
         <transition name="animations" 
             enter-active-class="slideInLeft"
@@ -73,13 +74,6 @@ export default {
             this.getUserChats()
         }
     },
-    directives: {
-        focus: {
-            inserted: function (el) {
-                el.focus()
-            }
-        }
-    },
     methods: {
         logout() {
             this.$store.dispatch('unsetUser')
@@ -88,7 +82,12 @@ export default {
         newChat() {
             this.drawer = true
         },
+        openChat(chat) {
+            bus.$emit('openChat', chat)
+            this.$socket.emit('chatEntered', { chatId: chat._id })
+        },
         async getUserChats() {
+            bus.$emit('preloaderOn')
             try {
                 const id = this.$store.getters.getUserId
                 backendService.setJwt()
@@ -100,6 +99,9 @@ export default {
                 if(e.response.status == 401) {
                     this.$store.dispatch('unsetUser')
                 }
+            }
+            finally {
+                bus.$emit('preloaderOff')
             }
         }
     }

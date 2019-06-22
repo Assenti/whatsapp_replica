@@ -2,6 +2,13 @@
     <div id="app">
         <component :is="current"/>
         <preloader v-if="preloader"/>
+        <transition name="animations"
+            enter-active-class="toastUp"
+            leave-active-class="toastDown">
+            <toast v-if="toastText" 
+            :text="toastText" 
+            @closed="toastText = ''"/>
+        </transition>
     </div>
 </template>
 
@@ -18,7 +25,9 @@ export default {
     },
     data() {
         return {
-            preloader: false
+            preloader: false,
+            toastText: '',
+            timeout: 5000
         }
     },
     computed: {
@@ -35,6 +44,25 @@ export default {
     created() {
         bus.$on('preloaderOn', () => this.preloader = true)
         bus.$on('preloaderOff', () => this.preloader = false)
+        bus.$on('toast', (data) => {
+            this.toastText = data.text
+            setTimeout(() => {
+                this.toastText = ''
+            }, this.timeout)
+        })
+        console.log(this.$socket.connected)
+        if(this.$socket.connected) {
+            this.toastText = 'Socket connected'
+            setTimeout(() => {
+                this.toastText = ''
+            }, this.timeout)
+        }
+        else {
+            this.toastText = 'Socket disconnected'
+            setTimeout(() => {
+                this.toastText = ''
+            }, this.timeout)
+        }
     },
     async mounted() {
         try {

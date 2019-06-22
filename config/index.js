@@ -11,5 +11,7 @@ module.exports = {
             pass: 'qwgqebnounjwnmfo'   
         }
     },
-    session: '1h'
+    session: '1h',
+    // devHost: 'http://localhost:3000',
+    devHost: 'http://192.168.1.138:3000'
 }

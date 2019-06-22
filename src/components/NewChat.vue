@@ -52,6 +52,7 @@
 <script>
 import ChatsList from '@/components/ChatsList'
 import UsersList from '@/components/UsersList'
+import { bus } from '@/main'
 import { backendService } from '@/services/backendService'
 
 export default {
@@ -106,6 +107,11 @@ export default {
                 console.log(e)
                 if(e.response.status == 401) {
                     this.$store.dispatch('unsetUser')
+                }
+                else {
+                    bus.$emit('toast', {
+                        text: e.response.data
+                    })
                 }
             }
         }

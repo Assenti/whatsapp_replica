@@ -4,7 +4,8 @@
         <slot name="other"></slot>
         <div v-for="(chat, index) in chats" 
             :key="index" 
-            class="chats-list-item">
+            class="chats-list-item"
+            @click="handleClick(chat)">
             <div class="chats-list-item-avatar">
                 <img :title="iconAuthor" 
                     src="../assets/user.png" 
@@ -34,13 +35,20 @@ export default {
     },
     methods: {
         name(chat) {
-            return `${chat.users[1].firstname} ${chat.users[1].lastname}`
+            let filtered = chat.users.filter(user => {
+                return this.$store.getters.getUserId !== user._id
+            })
+            return `${filtered[0].firstname} ${filtered[0].lastname}`
         },
         date(chat) {
             return new Date(chat.createdAt).toLocaleDateString()
         },
         lastMessage(chat) {
-            return chat.messages[chat.messages.length - 1]
+            return chat.messages.length > 0 ? 
+                chat.messages[chat.messages.length - 1].text : ''
+        },
+        handleClick(chat) {
+            this.$emit('clicked', chat)
         }
     }
 }

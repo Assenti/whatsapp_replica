@@ -44,10 +44,9 @@
 }
 
 .chats-participants-toolbar-avatar {
-    width: 39px;
-    height: 39px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 1px solid #8c8c8c;
     overflow: hidden;
     background-clip: $wa-light;
     margin-right: 13px;
@@ -203,7 +202,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .chat-box-content {
@@ -213,22 +212,73 @@
     max-height: calc(100% - 120px);
     overflow-y: auto;
     background-position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chat-box-message-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    &.own {
+        justify-content: flex-start;
+    }
 }
 
 .chat-box-message {
+    position: relative;
     min-height: 40px;
-    border-radius: 8px;
-    min-width: 200px;
-    background: white;
+    width: auto;
+    max-width: 70%;
+    background: $wa-green-light;
     display: flex;
     align-items: center;
-    margin: 5px;
+    justify-content: space-between;
+    margin: 3px 20px;
     padding: 0 15px;
     font-size: 14px;
+    border-radius: 8px 0 8px 8px;
+
+    &.own {
+        background: white;
+        border-radius: 0 8px 8px 8px;
+    }
+
+    & > .chat-box-message-tail {
+        position: absolute;
+        top: 0;
+        right: -6px;
+        background: $wa-green-light;
+        width: 8px; 
+        height: 8px;
+        border-radius: 0 0 100% 0;  
+    }
+
+    &.own > .chat-box-message-tail {
+        background: white;
+        border-color: white;
+        left: -6px !important;
+        border-radius: 0 0 0 100% !important;  
+    }
+
+    & > div:nth-child(2) {
+        font-size: 13px;
+    }
+
+    & > span {
+        font-size: 11px;
+        font-weight: 100;
+        color: #999999;
+        align-self: flex-end;
+        padding: 5px 0;
+        margin-left: 15px;
+    }    
 }
 
+
+
 .chat-box-controls {
-    background: $wa-light;
+    background: $wa-grey;
     border: .5px solid $wa-grey;
     height: 60px;
     display: flex;
@@ -240,11 +290,12 @@
 .chat-box-message-send-block {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
 }
 
 .chat-box-controls-field {
-    width: calc(100% - 80px) !important;
-    max-width: calc(100% - 80px) !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
     margin: 0 10px;
 }

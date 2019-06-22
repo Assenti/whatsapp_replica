@@ -51,14 +51,12 @@ export default {
             }
         },
         validateBeforeSubmit() {
-            console.log('INVOKED')
             this.$validator.validateAll()
             .then(result => {
                 if(result) {
                     this.logIn()
                     return
                 }
-                console.log('Invalid')
             })
         }
     }

@@ -7,13 +7,15 @@ import VueSocketIO from 'vue-socket.io'
 import FormField from './components/FormField'
 import Icon from './components/Icon'
 import Btn from './components/Btn'
+import Toast from './components/Toast'
 import VeeValidate from 'vee-validate'
 import { backendService } from './services/backendService'
+import config from '../config'
 
 Vue.use(VeeValidate)
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:3000'
+    connection: config.devHost
 }))
 
 Vue.prototype.$backend = backendService
@@ -22,6 +24,7 @@ Vue.config.productionTip = false
 Vue.component('form-field', FormField)
 Vue.component('btn', Btn)
 Vue.component('icon', Icon)
+Vue.component('toast', Toast)
 
 export const bus = new Vue()
 

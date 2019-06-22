@@ -37,12 +37,15 @@ export default {
     },
     mounted() {
         this.$parent.$on('clearField', () => {
-            console.log('invoked')
             this.content = ''
         })
     },
-    computed: {
-        
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus()
+            }
+        }
     },
     methods: {
         handleInput(e) {
