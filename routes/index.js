@@ -6,13 +6,17 @@ const userCtrl = require('../controllers/userCtrl')
 const chatCtrl = require('../controllers/chatCtrl')
 const messageCtrl = require('../controllers/messageCtrl')
 
-// Users API
+// Auth API
 router.post('/login', authCtrl.login)
+router.get('/session', verifyToken, authCtrl.checkSession)
+
+// Users API
 router.post('/register', userCtrl.register)
 router.get('/searchContacts', verifyToken, userCtrl.searchUser)
 
 // Chats API
 router.post('/chat', verifyToken, chatCtrl.createChat)
+router.get('/chats', verifyToken, chatCtrl.getChats)
 router.delete('/chat', verifyToken, chatCtrl.deleteChat)
 
 module.exports = router

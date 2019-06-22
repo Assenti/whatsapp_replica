@@ -18,6 +18,11 @@ export default new Vuex.Store({
       if(state.user) {
         return state.user.token
       }
+    },
+    getUserId(state) {
+      if(state.user) {
+        return state.user._id
+      }
     }
   },
   mutations: {

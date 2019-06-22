@@ -5,16 +5,17 @@ const socketEvents = (ws) => {
     ws.sockets.on('connection', (socket)=> {
 		console.log('Sockets connected...')
 
-		socket.on('newMsg', data => {
+		socket.on('newMsg', async data => {
 			console.log(data)
 			const { chatId, senderId, message } = data
-			msg.addMessage(chatId, senderId, message)
-			.then(updatedChat => {
+			
+			try {
+				const updChat = await msg.addMessage(chatId, senderId, message)
 				socket.emit('newMsg', message)
-			})
-			.catch(e => {
-				console.log(e)
-			})			
+			}
+			catch (e) {
+				socket.emit('newMsg', 'Error occurred')
+			}
 		})
 
 		// socket.on('roomentered', (data)=> {

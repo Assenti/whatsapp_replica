@@ -5,8 +5,8 @@ const User = require('../models/User')
 exports.createChat = (req, res) => {
     const { creator, participant } = req.body
     let chat = new Chat()
-    chat.users.push(creator._id)
-    chat.users.push(participant._id)
+    chat.users.push(creator)
+    chat.users.push(participant)
 
     chat.save((err, newChat) => {
         if(err) {
@@ -48,6 +48,25 @@ exports.createChat = (req, res) => {
             })
         }
     })
+}
+
+// Get user chats list
+exports.getChats = async (req, res) => {
+    const { id } = req.query
+    try {
+        const user = await User.findById(id)
+        .populate('chats')
+        .populate({ 
+            path: 'chats',
+            populate: 'users'
+        })
+        .exec()
+        res.send(user.chats)
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).send('Error occurred while fetching user')
+    }
 }
 
 // Existing Chat Removing

@@ -4,7 +4,8 @@
         <slot name="other"></slot>
         <div v-for="(user, index) in users" 
             :key="index" 
-            class="chats-list-item">
+            class="chats-list-item"
+            @click="handleClick(user)">
             <div class="chats-list-item-avatar">
                 <img :title="iconAuthor" 
                     src="../assets/user.png" 
@@ -28,6 +29,11 @@ export default {
     data() {
         return {
             iconAuthor: 'Icons from https://www.flaticon.com/authors/smashicons'
+        }
+    },
+    methods: {
+        handleClick(user) {
+            this.$emit('clicked', user)
         }
     }
 }

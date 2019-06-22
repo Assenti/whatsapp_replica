@@ -51,6 +51,7 @@ import ChatBox from '@/components/ChatBox'
 import ChatsList from '@/components/ChatsList'
 import RightDrawer from '@/components/RightDrawer'
 import NewChat from '@/components/NewChat'
+import { backendService } from '@/services/backendService'
 import { bus } from '@/main'
 
 export default {
@@ -67,6 +68,11 @@ export default {
     created() {
         bus.$on('closeDrawer', () => this.drawer = false)
     },
+    mounted() {
+        if(this.chats.length == 0) {
+            this.getUserChats()
+        }
+    },
     directives: {
         focus: {
             inserted: function (el) {
@@ -80,9 +86,21 @@ export default {
             this.menu = false
         },
         newChat() {
-            console.log('Invoked')
-            // this.$emit('clicked')
             this.drawer = true
+        },
+        async getUserChats() {
+            try {
+                const id = this.$store.getters.getUserId
+                backendService.setJwt()
+                const res = await backendService.http.get(`/chats?id=${id}`)
+                this.chats = res.data
+            }
+            catch (e) {
+                console.log(e)
+                if(e.response.status == 401) {
+                    this.$store.dispatch('unsetUser')
+                }
+            }
         }
     }
 }

@@ -32,7 +32,8 @@
                     </div>
                 </template>
             </chats-list>
-            <users-list :users="searchedContacts">
+            <users-list :users="searchedContacts"
+                @clicked="createChat">
                 <template slot="other" v-if="searchedContacts.length > 0">
                     <div class="chats-list-item-disabled">
                         <div class="chats-list-item-content" style="width: 100%">
@@ -70,9 +71,13 @@ export default {
                 let self = this
                 setTimeout( async() => {
                     try {
+                        const id = this.$store.getters.getUserId
                         backendService.setJwt()
                         const res = await backendService.http.get(`/searchContacts?query=${value}`)
                         self.searchedContacts = res.data
+                        self.searchedContacts = self.searchedContacts.filter(user => {
+                            return user._id !== id
+                        })
                     }
                     catch (e) {
                         console.log(e)
@@ -85,7 +90,25 @@ export default {
         }
     },
     methods: {
-        
+        async createChat(user) {
+            const creator = this.$store.getters.getUserId
+            const participant = user._id
+            const data = {
+                creator,
+                participant
+            }
+
+            try {
+                backendService.setJwt()
+                const newChat = await backendService.http.post('/chat', data)
+            }
+            catch (e) {
+                console.log(e)
+                if(e.response.status == 401) {
+                    this.$store.dispatch('unsetUser')
+                }
+            }
+        }
     }
 }
 </script>

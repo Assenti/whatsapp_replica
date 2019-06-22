@@ -42,3 +42,7 @@ exports.login = (req, res) => {
         }
     })
 }
+
+exports.checkSession = (req, res) => {
+    res.sendStatus(200)
+}

@@ -11,5 +11,5 @@ module.exports = {
             pass: 'qwgqebnounjwnmfo'   
         }
     },
-    session: '30m'
+    session: '1h'
 }

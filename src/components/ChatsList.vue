@@ -12,10 +12,10 @@
             </div>
             <div class="chats-list-item-content">
                 <div class="chats-list-item-title">
-                    <div>Tony Stark</div>
-                    <span>01/01/2019</span>
+                    <div>{{ name(chat) }}</div>
+                    <span>{{ date(chat) }}</span>
                 </div>
-                <div class="chats-list-item-subtitle">Last message of chat</div>
+                <div class="chats-list-item-subtitle">{{ lastMessage(chat) }}</div>
             </div>
         </div>
     </div>
@@ -30,6 +30,17 @@ export default {
     data() {
         return {
             iconAuthor: 'Icons from https://www.flaticon.com/authors/smashicons'
+        }
+    },
+    methods: {
+        name(chat) {
+            return `${chat.users[1].firstname} ${chat.users[1].lastname}`
+        },
+        date(chat) {
+            return new Date(chat.createdAt).toLocaleDateString()
+        },
+        lastMessage(chat) {
+            return chat.messages[chat.messages.length - 1]
         }
     }
 }

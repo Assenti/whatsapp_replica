@@ -68,7 +68,6 @@ exports.register = (req, res) => {
 exports.searchUser = async (req, res) => {
     const { query } = req.query
     const myRegExp = new RegExp(`${query}`, 'i')
-    console.log(myRegExp)
     try {
         let users = await User.find({
             $or: [
