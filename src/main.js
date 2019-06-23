@@ -11,6 +11,7 @@ import Toast from './components/Toast'
 import VeeValidate from 'vee-validate'
 import { backendService } from './services/backendService'
 import config from '../config'
+// import VueQrcode from '@chenfengyuan/vue-qrcode'
 
 Vue.use(VeeValidate)
 Vue.use(new VueSocketIO({
@@ -21,6 +22,7 @@ Vue.use(new VueSocketIO({
 Vue.prototype.$backend = backendService
 Vue.prototype.$http = backendService.http
 Vue.config.productionTip = false
+// Vue.component(VueQrcode.name, VueQrcode)
 Vue.component('form-field', FormField)
 Vue.component('btn', Btn)
 Vue.component('icon', Icon)

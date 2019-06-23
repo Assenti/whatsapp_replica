@@ -96,9 +96,14 @@ export default {
         },
         async register() {
             try {
+                let vm = this
                 bus.$emit('preloaderOn')
                 await this.$http.post('/register', this.credentials)
                 this.msg = 'You are successfully registered'
+                const { email, password } = this.credentials
+                setTimeout(() => {
+                    vm.logIn(email, password)
+                }, 1000)
             }
             catch(e) {
                 this.error = e.response.data ? e.response.data : 'Error occurred'
@@ -108,6 +113,17 @@ export default {
             }
             finally {
                 bus.$emit('preloaderOff')
+            }
+        },
+        async logIn(login, password) {
+            try {
+                await this.$backend.login({
+                    login: login,
+                    password: password
+                })
+            }
+            catch(e) {
+                this.error = e
             }
         }
     }

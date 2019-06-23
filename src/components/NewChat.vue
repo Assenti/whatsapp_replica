@@ -102,6 +102,8 @@ export default {
             try {
                 backendService.setJwt()
                 const newChat = await backendService.http.post('/chat', data)
+                bus.$emit('toast', { text: 'New chat successfully created '})
+                bus.$emit('closeDrawer')
             }
             catch (e) {
                 console.log(e)
