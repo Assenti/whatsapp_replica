@@ -19,4 +19,7 @@ router.post('/chat', verifyToken, chatCtrl.createChat)
 router.get('/chats', verifyToken, chatCtrl.getChats)
 router.delete('/chat', verifyToken, chatCtrl.deleteChat)
 
+// Messages API
+router.get('/messages', verifyToken, messageCtrl.getChatMessages)
+
 module.exports = router

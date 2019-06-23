@@ -11,6 +11,7 @@ import Toast from './components/Toast'
 import VeeValidate from 'vee-validate'
 import { backendService } from './services/backendService'
 import config from '../config'
+// import 'materialize-css/dist/css/materialize.min.css'
 
 Vue.use(VeeValidate)
 Vue.use(new VueSocketIO({

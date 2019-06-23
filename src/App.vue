@@ -32,7 +32,6 @@ export default {
     },
     computed: {
         current() {
-            console.log(this.$store.getters.isLoggedIn)
             if(this.$store.getters.isLoggedIn) {
                 return ChatRoom
             }
@@ -50,7 +49,7 @@ export default {
                 this.toastText = ''
             }, this.timeout)
         })
-        console.log(this.$socket.connected)
+
         if(this.$socket.connected) {
             this.toastText = 'Socket connected'
             setTimeout(() => {

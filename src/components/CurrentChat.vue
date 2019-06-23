@@ -12,6 +12,21 @@
                 <icon title="Attach" class="mx-20" icon="attach_file"/>
                 <icon title="Menu" icon="more_vert"/>
             </div>
+            <div class="chat-box-preloader" v-if="loading">
+                <div class="chat-box-preloader-container">
+                    <div class="preloader-wrapper active">
+                        <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="chat-box-content">
             <div class="chat-box-message-container" 
@@ -47,6 +62,8 @@
 </template>
 
 <script>
+import { backendService } from '@/services/backendService'
+import { bus } from '@/main'
 export default {
     props: {
         chatData: Object
@@ -54,17 +71,32 @@ export default {
     data() {
         return {
             currentData: this.chatData,
-            messages: this.chatData.messages,
-            newMsg: ''
+            messages: [],
+            newMsg: '',
+            page: 1,
+            loading: false
         }
     },
     created() {
         this.sockets.subscribe('newMsg', data => {
-            this.messages.push(data)
+            this.messages.unshift(data)
         })
         this.sockets.subscribe('newMsgToChat', data => {
-            this.messages.push(data)
+            this.messages.unshift(data)
         })
+    },
+    mounted() {
+        let vm = this
+        if(this.messages.length == 0) {
+            this.getChatMessages()
+        }
+
+        document.getElementsByClassName('chat-box-content')[0].onscroll = function(){
+            if(this.scrollTop == 0) {
+                vm.page++
+                vm.getChatMessages()
+            }
+        }
     },
     computed: {
         participant() {
@@ -87,8 +119,34 @@ export default {
                 this.newMsg = ''
             }
             else {
-                console.log('No connection to backend')
+                bus.$emit('toast', { text: 'No connection to backend' })
             }         
+        },
+        async getChatMessages() {
+            this.loading = true
+            try {
+                const chatId = this.chatData._id
+                backendService.setJwt()
+                const res = await backendService.http.get(`/messages?chatId=${chatId}&page=${this.page}`)
+                if(this.messages.length > 0) {
+                    this.messages.concat(res.data)
+                }
+                else {
+                    this.messages = res.data
+                }
+            }
+            catch (e) {
+                console.log(e)
+                if(e.response.status == 401) {
+                    this.$store.dispatch('unsetUser')
+                }
+                else {
+                    bus.$emit('toast', { text: e.response.data })
+                }
+            }
+            finally {
+                this.loading = false
+            }
         },
         defineType(msg) {
             if(msg) {
