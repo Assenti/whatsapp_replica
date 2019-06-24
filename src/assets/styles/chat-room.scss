@@ -89,7 +89,7 @@
         background-color: $wa-grey;
     }
 
-    &:hover {
+    &:hover:not(.active) {
         background-color: $wa-light;
     }
 }

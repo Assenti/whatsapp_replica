@@ -28,10 +28,11 @@
             </div>
             <div class="chat-search-block">
                 <form-field
+                    v-model="search"
                     placeholder="Search or start new chat" 
                     icon="search"/>
             </div>
-            <chats-list :chats="chats"
+            <chats-list :chats="filteredChats"
                 @clicked="openChat"/>
         </div>
         <transition name="animations" 
@@ -63,7 +64,8 @@ export default {
         return {
             menu: false,
             drawer: false,
-            chats: []
+            chats: [],
+            search: ''
         }
     },
     created() {
@@ -72,6 +74,22 @@ export default {
     mounted() {
         if(this.chats.length == 0) {
             this.getUserChats()
+        }
+    },
+    computed: {
+        filteredChats() {
+            if(this.search) {
+                return this.chats.filter(chat => {
+                    let filtered = chat.users.filter(user => {
+                        return this.$store.getters.getUserId !== user._id
+                    })
+                    return filtered[0].firstname.toLowerCase().includes(this.search.toLowerCase()) ||
+                        filtered[0].lastname.toLowerCase().includes(this.search.toLowerCase())
+                })
+            }
+            else {
+                return this.chats
+            } 
         }
     },
     methods: {
@@ -84,6 +102,7 @@ export default {
         },
         openChat(chat) {
             bus.$emit('openChat', chat)
+            this.$store.dispatch('setActiveChat', chat)
             this.$socket.emit('chatEntered', { chatId: chat._id })
         },
         async getUserChats() {

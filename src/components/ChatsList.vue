@@ -4,6 +4,7 @@
         <slot name="other"></slot>
         <div v-for="(chat, index) in chats" 
             :key="index" 
+            :class="{'active': activeChat(chat) }"
             class="chats-list-item"
             @click="handleClick(chat)">
             <div class="chats-list-item-avatar">
@@ -22,7 +23,6 @@
     </div>
 </template>
 
-
 <script>
 export default {
     props: {
@@ -34,6 +34,11 @@ export default {
         }
     },
     methods: {
+        activeChat(chat) {
+            if(this.$store.getters.getActiveChat) {
+                return chat._id === this.$store.getters.getActiveChat._id
+            }
+        },
         name(chat) {
             let filtered = chat.users.filter(user => {
                 return this.$store.getters.getUserId !== user._id

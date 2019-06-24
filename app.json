@@ -1,0 +1,14 @@
+{
+    "name": "WhatsApp Replica",
+    "description": "The WhatsApp popular messenger web version replica",
+    "repository": "https://github.com/Assenti/whatsapp_replica",
+    "keywords": [
+        "nodejs",
+        "express"
+    ],
+    "scripts": {
+      "dokku": {
+        "predeploy": "npm run build"
+      }
+    }
+  }

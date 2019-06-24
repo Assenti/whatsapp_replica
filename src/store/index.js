@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: JSON.parse(localStorage.getItem('user')) || null
+    user: JSON.parse(localStorage.getItem('user')) || null,
+    activeChat: null
   },
   getters: {
     isLoggedIn(state) {
@@ -23,11 +24,19 @@ export default new Vuex.Store({
       if(state.user) {
         return state.user._id
       }
+    },
+    getActiveChat(state) {
+      if(state.activeChat) {
+        return state.activeChat
+      }
     }
   },
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    setActiveChat(state, chat) {
+      state.activeChat = chat
     }
   },
   actions: {
@@ -38,6 +47,9 @@ export default new Vuex.Store({
     unsetUser(context) {
       localStorage.removeItem('user')
       context.commit('setUser', null)
+    },
+    setActiveChat(context, chat) {
+      context.commit('setActiveChat', chat)
     }
   }
 })

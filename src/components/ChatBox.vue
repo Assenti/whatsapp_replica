@@ -22,7 +22,6 @@ export default {
     },
     created() {
         bus.$on('openChat', chat => {
-            console.log(chat)
             this.chatData = chat
         })
     }

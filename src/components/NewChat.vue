@@ -100,10 +100,17 @@ export default {
             }
 
             try {
-                backendService.setJwt()
-                const newChat = await backendService.http.post('/chat', data)
-                bus.$emit('toast', { text: 'New chat successfully created '})
-                bus.$emit('closeDrawer')
+                const result = await this.checkIsChatExists(creator, participant)
+                if(result.exists) {
+                    bus.$emit('closeDrawer')
+                    bus.$emit('openChat', result.chat)
+                }
+                else {
+                    backendService.setJwt()
+                    const newChat = await backendService.http.post('/chat', data)
+                    bus.$emit('toast', { text: 'New chat successfully created '})
+                    bus.$emit('closeDrawer')
+                }
             }
             catch (e) {
                 console.log(e)
@@ -111,11 +118,26 @@ export default {
                     this.$store.dispatch('unsetUser')
                 }
                 else {
-                    bus.$emit('toast', {
-                        text: e.response.data
-                    })
+                    bus.$emit('toast', { text: 'Error occurred while creating chat' })
                 }
             }
+        },
+        async checkIsChatExists(creator, participant) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const res = await backendService.http.get('/checkChat', {
+                        params: {
+                            userId: creator,
+                            participantId: participant
+                        }
+                    })
+                    resolve(res.data)
+                }
+                catch (e) {
+                    reject(e)
+                    console.log(e)
+                }
+            })
         }
     }
 }

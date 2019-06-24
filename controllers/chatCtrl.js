@@ -2,52 +2,46 @@ const Chat = require('../models/Chat')
 const User = require('../models/User')
 
 // New Chat Creatiion
-exports.createChat = (req, res) => {
+exports.createChat = async (req, res) => {
     const { creator, participant } = req.body
     let chat = new Chat()
     chat.users.push(creator)
     chat.users.push(participant)
 
-    chat.save((err, newChat) => {
-        if(err) {
-            res.status(500).send('Error occurred while creating chat')
+    try {
+        const newChat = await chat.save()
+        let foundedCreator = await User.findById(creator).exec()
+        let foundedParticipant = await User.findById(participant).exec()
+        foundedCreator.chats.push(newChat._id)
+        foundedParticipant.chats.push(newChat._id)
+        await foundedCreator.save()
+        await foundedParticipant.save()
+        res.send(newChat)
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).send('Error occurred while creating chat')
+    }
+}
+
+// Check is chat exists
+exports.checkChat = async (req, res) => {
+    console.log(req.query)
+    const { userId, participantId } = req.query
+    try {
+        const chats = await Chat.find({ users: { $in: [userId ] }}).populate('users')
+        for(const chat of chats) {
+            if(chat.users[0]._id.toString() === userId && 
+                chat.users[1]._id.toString() === participantId) {
+                return res.send({ exists: true, chat: chat })
+            }
         }
-        else {
-            User.findById(creator)
-            .exec((err, foundedCreator) => {
-                if(err) {
-                    res.status(500).send('Error occuredd while searching user-creator')
-                }
-                else {
-                    User.findById(participant)
-                    .exec((err, foundedParticipant) => {
-                        if(err) {
-                            res.status(500).send('Error occuredd while searching user-participant')
-                        }
-                        else {
-                            foundedCreator.chats.push(newChat._id)
-                            foundedCreator.save((err, savedCreator) => {
-                                if(err) {
-                                    res.status(500).send('Error occuredd while updating user-creator')
-                                }
-                                else {
-                                    foundedParticipant.chats.push(newChat._id)
-                                    foundedParticipant.save((err, savedParticipant) => {
-                                        if(err) {
-                                            res.status.send('Error occurred while updating user-participant')
-                                        }
-                                        else {
-                                            res.send(newChat)
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    })
-                }
-            })
-        }
-    })
+        res.send({ exists: false })
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).send('Error occurred while checking chat')
+    }
 }
 
 // Get user chats list

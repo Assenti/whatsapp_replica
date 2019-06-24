@@ -12,6 +12,5 @@ module.exports = {
         }
     },
     session: '1h',
-    devHost: 'http://localhost:3000',
-    // devHost: 'http://192.168.1.105:3000'
+    devHost: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
 }

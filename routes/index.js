@@ -17,6 +17,7 @@ router.get('/searchContacts', verifyToken, userCtrl.searchUser)
 // Chats API
 router.post('/chat', verifyToken, chatCtrl.createChat)
 router.get('/chats', verifyToken, chatCtrl.getChats)
+router.get('/checkChat', chatCtrl.checkChat)
 router.delete('/chat', verifyToken, chatCtrl.deleteChat)
 
 // Messages API
