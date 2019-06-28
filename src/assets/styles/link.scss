@@ -1,0 +1,8 @@
+.link {
+    color: cornflowerblue;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

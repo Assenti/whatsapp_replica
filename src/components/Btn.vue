@@ -8,16 +8,16 @@
 
 <script>
 export default {
-    props: ['btnTitle', 'type', 'block', 'disabled'],
+    props: {
+        btnTitle: String,
+        type: String,
+        block: Boolean,
+        disabled: Boolean
+    },
     data() {
         return {
 
         }
-    },
-    mounted() {
-    },
-    methods: {
-        
     }
 }
 </script>

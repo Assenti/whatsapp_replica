@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <div class="login-title">Register</div>
-        <form class="form" @submit.prevent="validateBeforeSubmit">
+        <form class="form px-10" @submit.prevent="validateBeforeSubmit">
             <form-field v-model="credentials.firstname" 
                 label="Firstname"
                 class="mb-5"
@@ -49,6 +49,7 @@
             <div class="success">{{ msg }}</div>
             <btn btnTitle="register" 
                  type="submit"
+                 :block="true"
                  @click="validateBeforeSubmit"/>
         </form>
     </div>

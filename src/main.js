@@ -3,11 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/styles/all.scss'
+import 'animate.css'
 import VueSocketIO from 'vue-socket.io'
 import FormField from './components/FormField'
 import Icon from './components/Icon'
 import Btn from './components/Btn'
 import Toast from './components/Toast'
+import Checkbox from './components/Checkbox'
 import VeeValidate from 'vee-validate'
 import { backendService } from './services/backendService'
 import config from '../config'
@@ -27,6 +29,7 @@ Vue.component('form-field', FormField)
 Vue.component('btn', Btn)
 Vue.component('icon', Icon)
 Vue.component('toast', Toast)
+Vue.component('check-box', Checkbox)
 
 export const bus = new Vue()
 

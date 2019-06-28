@@ -11,7 +11,6 @@ exports.getChatMessages = async (req, res) => {
         .sort({ createdAt: -1 })
         .exec()
 
-        console.log(messages)
         res.send(messages)
     }
     catch (e) {

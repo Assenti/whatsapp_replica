@@ -1,7 +1,7 @@
 .form-field {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    width: 100%;
     min-width: 300px;
 
     & > label {
@@ -42,7 +42,7 @@
 
         &::placeholder {
             color: #8c8c8c;
-            font-weight: 100;
+            font-weight: 300;
         }
     }
 }

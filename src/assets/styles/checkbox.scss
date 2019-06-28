@@ -1,0 +1,60 @@
+@import 'colors';
+
+.checkbox {
+    display: flex;
+    width: 100%;
+	align-items: center;
+    
+    label {
+        color: #999;
+        font-weight: 300;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    & > div {
+        position: relative;
+
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid $wa-green;
+            border-radius: 3px; 
+            cursor: pointer;
+            outline: none;
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: $wa-green;
+        }
+
+        input[type="checkbox"]:checked ~ span:after {
+            display: block;
+        }
+    
+        span:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    
+        span:after {
+            cursor: pointer;
+            left: 9px;
+            top: 6px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+}

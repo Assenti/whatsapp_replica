@@ -15,7 +15,7 @@
                 :type="type ? type : 'text'"
                 :placeholder="placeholder"/>
         </div>
-        <span>{{ msg }}</span>
+        <span class="animated shake faster" v-if="msg">{{ msg }}</span>
     </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
             this.$emit('input', this.content)
         },
         handleFocus() {
-
+            
         },
         handleBlur() {
 

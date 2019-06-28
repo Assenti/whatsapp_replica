@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { Base64 } from '../services/decodeService'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    user: decodeUserInfo(localStorage.getItem('user')) || null,
     activeChat: null
   },
   getters: {
@@ -41,8 +42,8 @@ export default new Vuex.Store({
   },
   actions: {
     setUser(context, user) {
-      localStorage.setItem('user', JSON.stringify(user))
-      context.commit('setUser', user)
+      localStorage.setItem('user', user)
+      context.commit('setUser', decodeUserInfo(user))
     },
     unsetUser(context) {
       localStorage.removeItem('user')
@@ -53,3 +54,10 @@ export default new Vuex.Store({
     }
   }
 })
+
+function decodeUserInfo(userInfo) {
+  if(userInfo) {
+    return JSON.parse(Base64.decode(userInfo))
+  }
+  else return null
+}

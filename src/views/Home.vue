@@ -1,7 +1,8 @@
 <template>
   <div class="main">
+    <div class="main-backdrop"></div>
     <div class="main-header">
-      <div class="container">
+      <div class="main-container">
         <div class="main-header-title">
           <img class="main-header-icon" src="../assets/whatsapp.png" alt="logo">
           <div class="main-header-text">whatsapp replica web</div>

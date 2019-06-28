@@ -1,7 +1,7 @@
 <template>
     <div class="login">
-        <div class="login-title">Login</div>
-        <form class="form" @submit.prevent="validateBeforeSubmit">
+        <div class="login-title">Sign in</div>
+        <form class="form px-10" @submit.prevent="validateBeforeSubmit">
             <form-field v-model="login"
                 label="Login"
                 class="mb-5"
@@ -19,35 +19,49 @@
                 :msg="errors.first('password')"
                 type="password"
                 icon="lock"/>
-            <div class="error">{{ error }}</div>
-            <btn btnTitle="login" type="submit"/>
+            <div class="error mt-10">{{ error }}</div>
+            <check-box v-model="remember"
+                class="my-10 ml-15" 
+                label="Remember"/>
+            <btn btnTitle="login" type="submit" :block="true"/>
         </form>
     </div>
 </template>
 
 <script>
+import { bus } from '@/main'
 export default {
     data() {
         return {
             login: '',
             password: '',
             loading: false,
-            error: undefined
+            error: undefined,
+            remember: false
         }
-    },
-    watch: {
-        
     },
     methods: {
         async logIn() {
+            bus.$emit('preloaderOn')
+
+            const credentials = {
+                login: this.login,
+                password: this.password,
+                remember: this.remember
+            }
+
             try {
-                await this.$backend.login({
-                    login: this.login,
-                    password: this.password
-                })
+                const { data } = await this.$backend.http.post('/login', credentials)
+                this.$store.dispatch('setUser', data)
+                bus.$emit('loggedIn')
             }
             catch(e) {
-                this.error = e
+                console.log(e)
+                let errMsg = e.response ? e.response.data : 'Error occured'
+                this.error = errMsg
+            }
+            finally {
+                bus.$emit('preloaderOff')
             }
         },
         validateBeforeSubmit() {

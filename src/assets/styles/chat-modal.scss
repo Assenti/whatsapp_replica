@@ -10,20 +10,40 @@
     z-index: 1;
 }
 
+
 .chat-modal {
     box-shadow: 1px 5px 20px rgba(0, 0, 0, .4);
-    max-width: 1000px;
-    min-height: 440px;
+    width: 1024px;
+    min-height: 500px;
     background-color: $wa-light;
     z-index: 2;
     display: flex;
     flex-wrap: wrap;
-    padding: 2% 1%;
-    border-radius: 2px;
+    align-items: center;
+    padding: 2%;
+    border-radius: 3px;
 }
 
 .chat-modal-block {
     flex-basis: 350px;
     flex-grow: 1;
     min-width: 350px;
+}
+
+.chat-modal-block-title {
+    text-align: center;
+    color: #909090;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.chat-modal-block-content {
+    margin: 20px 0;
+}
+
+.chat-modal-block-footer {
+    text-align: center;
+    color: #909090;
+    font-size: 14px;
+    font-weight: 300;
 }

@@ -17,6 +17,7 @@
         height: 35px;
         cursor: pointer;
         font-size: 14px;
+        user-select: none;
     }
 
     & > button:hover {
@@ -26,6 +27,7 @@
 }
 
 .btn.block {
+    width: 100%;
     & > button {
         width: 100%;
     }

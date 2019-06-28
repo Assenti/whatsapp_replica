@@ -9,30 +9,9 @@ const instance = axios.create({
 
 export const backendService = {
     http: instance,
-    login: login,
     setJwt: setJwt
 }
 
 function setJwt() {
     instance.defaults.headers.common['Authorization'] = store.getters.getToken
-}
-
-function login(credentials) {
-    return new Promise((resolve, reject) => {
-        bus.$emit('preloaderOn')
-        instance.post('/login', credentials)
-        .then(res => {
-            store.dispatch('setUser', res.data)
-            bus.$emit('loggedIn')
-            resolve()
-        })
-        .catch(err => {
-            console.log(err)
-            let errMsg = err.response.data ? err.response.data : 'Error occured'
-            reject(errMsg)
-        })
-        .finally(() => {
-            bus.$emit('preloaderOff')
-        })
-    })
 }
