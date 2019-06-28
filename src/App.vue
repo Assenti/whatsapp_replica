@@ -64,19 +64,21 @@ export default {
         }
     },
     async mounted() {
-        try {
-            backendService.setJwt()
-            await backendService.http.get('/session')
-        }
-        catch (e) {
-            if(e.response.status == 401) {
-                this.$store.dispatch('unsetUser')
+        if(this.$store.getters.getUser) {
+            try {
+                backendService.setJwt()
+                await backendService.http.get('/session')
             }
-            else if(e.message && e.message === 'Network Error') {
-                bus.$emit('toast', { text: 'No connection to server' })
-            }
-            else {
-                bus.$emit('toast', { text: 'Server error occurred' })
+            catch (e) {
+                if(e.response.status == 401) {
+                    this.$store.dispatch('unsetUser')
+                }
+                else if(e.message && e.message === 'Network Error') {
+                    bus.$emit('toast', { text: 'No connection to server' })
+                }
+                else {
+                    bus.$emit('toast', { text: 'Server error occurred' })
+                }
             }
         }
     }

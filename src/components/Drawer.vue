@@ -6,7 +6,7 @@
                     <icon icon="arrow_back" 
                     color="white"/>
                 </div>
-                <span>New Chat</span>
+                <span>{{ header }}</span>
             </div>
         </div>
         <slot name="content" class="drawer-content"></slot>
@@ -16,6 +16,9 @@
 <script>
 import { bus } from '@/main'
 export default {
+    props: {
+        header: String
+    },
     data() {
         return {
         }

@@ -16,6 +16,7 @@
                 placeholder="Password"
                 v-validate="'required'"
                 name="password"
+                ref="pass"
                 :msg="errors.first('password')"
                 type="password"
                 icon="lock"/>

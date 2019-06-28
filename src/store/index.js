@@ -26,6 +26,16 @@ export default new Vuex.Store({
         return state.user._id
       }
     },
+    getUserFullName(state) {
+      if(state.user) {
+        return `${state.user.firstname} ${state.user.lastname}`
+      }
+    },
+    getUserStatus(state) {
+      if(state.user) {
+        return state.user.status
+      }
+    },
     getActiveChat(state) {
       if(state.activeChat) {
         return state.activeChat

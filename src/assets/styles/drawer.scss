@@ -10,28 +10,6 @@
     z-index: 2;
 }
 
-.slideInLeft {
-    animation: slideInLeft .3s;
-    -webkit-animation: slideInLeft .3s;
-    -moz-animation: slideInLeft .3s;
-}
-
-@keyframes slideInLeft {
-    0% { transform: translateX(-100%) }
-    100% { transform: translateX(0%) }
-}
-
-.slideOutRight {
-    animation: slideOutRight .3s;
-    -webkit-animation: slideOutRight .3s;
-    -moz-animation: slideOutRight .3s;
-}
-
-@keyframes slideOutRight {
-    0% { transform: translateX(0%) }
-    100% { transform: translateX(-100%) }
-}
-
 .drawer-toolbar {
     background-color: #00bfa5;
     height: 108px;

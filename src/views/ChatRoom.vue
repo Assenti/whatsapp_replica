@@ -7,9 +7,8 @@
                 </div>
                 <div class="flex align-center">
                     <div tabindex="-1"
-                        class="no-outline" 
-                        @blur="drawer = false" 
-                        @click="drawer = true">
+                        class="no-outline"  
+                        @click="openNewChat">
                         <icon icon="chat" 
                         title="New chat" 
                         class="mx-10"/>
@@ -20,8 +19,10 @@
                         @blur="menu = false">
                         <icon icon="more_vert" title="Menu"/>
                         <div class="menu" v-if="menu">
-                            <div class="menu-item">Profile</div>
-                            <div @click="logout" class="menu-item">Log out</div>
+                            <div class="menu-item"
+                                v-for="(item, index) in menuItems"
+                                :key="index" 
+                                @click="item.func">{{ item.title }}</div>
                         </div>
                     </div>
                 </div>
@@ -36,13 +37,14 @@
                 @clicked="openChat"/>
         </div>
         <transition name="animations" 
-            enter-active-class="slideInLeft"
-            leave-active-class="slideOutRight">
-            <right-drawer v-if="drawer">
+            enter-active-class="animated slideInLeft faster"
+            leave-active-class="animated slideOutLeft faster">
+            <drawer v-if="drawer" :header="currentDrawerHeader">
                 <template slot="content">
-                    <new-chat/>
+                    <new-chat v-if="newChat"/>
+                    <profile v-if="profile"/>
                 </template>
-            </right-drawer>
+            </drawer>
         </transition>
         <chat-box/>
     </div>
@@ -51,25 +53,37 @@
 <script>
 import ChatBox from '@/components/ChatBox'
 import ChatsList from '@/components/ChatsList'
-import RightDrawer from '@/components/RightDrawer'
+import Drawer from '@/components/Drawer'
 import NewChat from '@/components/NewChat'
+import Profile from '@/components/Profile'
 import { backendService } from '@/services/backendService'
 import { bus } from '@/main'
 
 export default {
     components: {
-        ChatBox, ChatsList, RightDrawer, NewChat
+        ChatBox, 
+        ChatsList, 
+        Drawer, 
+        NewChat,
+        Profile
     },
     data() {
         return {
             menu: false,
             drawer: false,
             chats: [],
-            search: ''
+            search: '',
+            currentDrawerHeader: '',
+            newChat: false,
+            profile: false,
+            menuItems: [
+                { title: 'Profile', func: this.openProfile },
+                { title: 'Log out', func: this.logout }
+            ]
         }
     },
     created() {
-        bus.$on('closeDrawer', () => this.drawer = false)
+        bus.$on('closeDrawer', () => this.closeDrawer())
     },
     mounted() {
         if(this.chats.length == 0) {
@@ -97,8 +111,14 @@ export default {
             this.$store.dispatch('unsetUser')
             this.menu = false
         },
-        newChat() {
-            this.drawer = true
+        openNewChat() {
+            this.drawer = this.newChat = true
+            this.currentDrawerHeader = 'New Chat'
+        },
+        openProfile() {
+            this.drawer = this.profile = true
+            this.menu = false
+            this.currentDrawerHeader = 'Profile'
         },
         openChat(chat) {
             bus.$emit('openChat', chat)
@@ -122,6 +142,11 @@ export default {
             finally {
                 bus.$emit('preloaderOff')
             }
+        },
+        closeDrawer() {
+            this.drawer = false
+            this.newChat = false
+            this.profile = false
         }
     }
 }

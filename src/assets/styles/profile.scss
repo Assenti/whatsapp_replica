@@ -1,0 +1,44 @@
+@import 'colors';
+
+.profile {
+    height: calc(100vh - 108px);
+    width: 100%;
+    background-color: #fff;
+    border-right: 1px solid $wa-grey;
+    overflow: hidden;
+}
+
+.profile-avatar-block {
+    height: 200px;
+    width: 100%;
+    background-color: $wa-light;
+}
+
+.profile-section {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, .1);
+    border-top: 1px solid $wa-grey;
+    padding: 15px 25px;
+
+    & > span {
+        font-size: 14px;
+        color: $wa-green;
+    }
+
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 5px;
+        font-size: 17px;
+    }
+
+    & > div.small {
+        font-size: 14px;
+    }
+}
+
+.profile-placeholder-hint {
+    height: 90px;
+    width: 100%;
+    background: $wa-light;
+}
